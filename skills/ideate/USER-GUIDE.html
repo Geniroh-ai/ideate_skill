@@ -102,18 +102,23 @@ ul.tight li::before{content:"";width:5px;height:5px;background:var(--accent);pos
     <div class="card">
       <div class="h">Personal skill (single user)</div>
       <div class="b">Drop the skill into Claude Code's skills directory.</div>
-<pre><span class="c"># clone and copy</span>
-git clone &lt;repo-url&gt; /tmp/ideate
-cp -R /tmp/ideate/skills/ideate ~/.claude/skills/</pre>
+<pre><span class="c"># clone and copy (SSH)</span>
+git clone git@github.com:Geniroh-ai/ideate_skill.git /tmp/ideate
+cp -R /tmp/ideate/skills/ideate ~/.claude/skills/
+
+<span class="c"># or HTTPS</span>
+git clone https://github.com/Geniroh-ai/ideate_skill.git /tmp/ideate</pre>
     </div>
     <div class="card">
       <div class="h">Plugin (shareable across team)</div>
-      <div class="b">Install as a Claude Code plugin from a git remote.</div>
-<pre><span class="c"># manual</span>
-git clone &lt;repo-url&gt; ~/.claude/plugins/ideate
+      <div class="b">Install as a Claude Code plugin from the git remote.</div>
+<pre><span class="c"># SSH</span>
+git clone git@github.com:Geniroh-ai/ideate_skill.git \
+  ~/.claude/plugins/ideate
 
-<span class="c"># or via marketplace (if added)</span>
-claude plugin add &lt;git-url&gt;</pre>
+<span class="c"># HTTPS</span>
+git clone https://github.com/Geniroh-ai/ideate_skill.git \
+  ~/.claude/plugins/ideate</pre>
     </div>
   </div>
   <div class="callout"><b>Requirements.</b> Claude Code (CLI / VS Code / JetBrains / web). Node.js (for compile + overflow detector). Google Chrome / Chromium / Edge (for PDF export + pixel-perfect fit check).</div>

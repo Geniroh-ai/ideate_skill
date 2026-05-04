@@ -49,21 +49,22 @@ Add your own by dropping a new folder under `skills/ideate/designs/` with a `des
 ### As a personal skill (single user)
 
 ```bash
-git clone <this-repo> /tmp/ideate
+# SSH
+git clone git@github.com:Geniroh-ai/ideate_skill.git /tmp/ideate
+cp -R /tmp/ideate/skills/ideate ~/.claude/skills/
+
+# or HTTPS
+git clone https://github.com/Geniroh-ai/ideate_skill.git /tmp/ideate
 cp -R /tmp/ideate/skills/ideate ~/.claude/skills/
 ```
 
 ### As a plugin (shareable across a team)
 
 ```bash
-# Add to your Claude Code plugin marketplace
-claude plugin add <git-url>
-```
-
-Or install manually:
-```bash
 mkdir -p ~/.claude/plugins
-git clone <this-repo> ~/.claude/plugins/ideate
+git clone git@github.com:Geniroh-ai/ideate_skill.git ~/.claude/plugins/ideate
+# or
+git clone https://github.com/Geniroh-ai/ideate_skill.git ~/.claude/plugins/ideate
 ```
 
 ## Requirements
