@@ -1,6 +1,6 @@
 ---
 name: ideate
-description: Use when the user wants to create a pitch deck, slide deck, board deck, or presentation from raw context (emails, briefs, notes, source material). Guides them through a structured wizard - context gathering, design selection from pre-built McKinsey-style variations, intent capture, markdown source-of-truth generation, HTML rendering, pixel-perfect content-alignment validation, and PDF export. Supports power-user shortcuts: `quick`, `from-md`, `regenerate`, `export`, `switch-design`, `check-fit`. Triggers on phrases like "make a pitch deck", "create a slide deck", "ideate a deck", "/ideate", or any request to turn source material into presentation slides.
+description: Use when the user wants to create a pitch deck, slide deck, board deck, or presentation from raw context (emails, briefs, notes, source material). Guides them through a structured wizard - context gathering, design selection from pre-built McKinsey-style variations, intent capture, a two-agent content pipeline (researcher gathers exhaustive evidence + internet data, strategist converts thesis into slide-by-slide markdown), HTML rendering, pixel-perfect content-alignment validation, and PDF export. Supports power-user shortcuts: `quick`, `from-md`, `regenerate`, `export`, `switch-design`, `check-fit`. Triggers on phrases like "make a pitch deck", "create a slide deck", "ideate a deck", "/ideate", or any request to turn source material into presentation slides.
 ---
 
 # ideate — McKinsey-style deck wizard
@@ -117,9 +117,70 @@ Then propose an outline based on everything captured so far. Action-titled slide
 
 Iterate until the user says yes.
 
-## Step 9 — Generate the markdown source of truth
+## Step 9 — Two-agent content pipeline (Researcher → Strategist → markdown)
 
-Write the deck content to `./<deck-name>/markdown/current.md` using this format:
+Content quality is the deck's biggest variable. Run a two-agent pipeline before writing the slide markdown.
+
+### Step 9a — Researcher agent
+
+Spawn a Research agent (using the Agent tool with `subagent_type: general-purpose`, or claude-code-guide / Explore if specifically appropriate) with a comprehensive brief:
+
+> **Researcher mission:** Produce an exhaustive, evidence-led thesis document covering everything relevant to this deck. Three sources of input:
+> 1. **Local context** — every file in `./<deck-name>/context/`. Read all of them, including PDFs, images, and any pasted notes. Extract every fact, figure, name, date, claim, and stated intent.
+> 2. **The user's brief** — audience (Step 3), intent (Step 4), key takeaways (Step 5), tone (Step 7).
+> 3. **Internet research** — use WebSearch for the latest authoritative data on every claim, statistic, market trend, regulation, and competitor reference touched by the context. Prefer primary sources (government, official institutions, peer-reviewed) over secondary commentary. Note publication dates.
+>
+> **Deliverables:** Write a structured markdown thesis to `./<deck-name>/markdown/01-research-thesis.md`:
+> - **Section 1 — Source material summary**: what was in the context folder, faithfully recapped
+> - **Section 2 — Verified facts and statistics**: every number, with sources and dates
+> - **Section 3 — Recent developments**: anything in the last 12–24 months that the context didn't capture
+> - **Section 4 — Stakeholders and entities**: who's involved, with current roles/positions
+> - **Section 5 — Open questions and gaps**: what couldn't be verified, what assumptions would need user confirmation
+> - **Section 6 — Strategic landscape**: competitors, alternatives, market context, regulatory backdrop
+>
+> Be exhaustive. Length is fine. The next agent needs raw material, not summary.
+
+Spawn this agent in the foreground — wait for its output before proceeding.
+
+When the agent returns, read `01-research-thesis.md` and surface to the user:
+- A 5-bullet summary of what the researcher found
+- Any "open questions" the researcher flagged
+- Ask: **"Anything to correct or add before we hand this to the strategist?"**
+
+### Step 9b — Strategist agent
+
+Spawn a Strategy agent (using the Agent tool with `subagent_type: general-purpose`) with this brief:
+
+> **Strategist mission:** You are a world-class management consultant and marketing strategist — McKinsey / BCG / Bain caliber, with deep B2B narrative craft. You've been given an exhaustive research thesis. Your job is to convert it into a slide-by-slide deck markdown that is decisive, audience-aware, and built around action-titles.
+>
+> **Inputs you must read:**
+> - `./<deck-name>/markdown/01-research-thesis.md` (the researcher's output)
+> - The user's brief: audience = `<from Step 3>`, intent = `<from Step 4>`, key takeaways = `<from Step 5>`, tone = `<from Step 7>`, design = `<from Step 6>`, target slide count = `<from Step 8>`
+> - `~/.claude/skills/ideate/slide-types.md` — the layout catalogue and component constraints (max bullets per column, max table rows, etc.) you must respect
+> - `~/.claude/skills/ideate/tone-presets.md` — the tone preset's language patterns
+>
+> **What to deliver:** Write `./<deck-name>/markdown/current.md` in the structured slide format used by `compile.js`. Every slide must:
+> - Have an **action title** (a conclusion, not a topic)
+> - Pick the right layout from the catalogue for the content shape
+> - Respect the layout's component constraints — never exceed bullet/row limits
+> - Source every numerical claim from the research thesis (don't invent)
+> - Match the tone preset's language patterns
+> - Include a Speaker Notes section at the end with one block per slide
+>
+> **Argument architecture:** Use the user's key takeaways as the spine. Every slide should earn its place by supporting one takeaway. Use section dividers (3 max) to chapter the deck. Open with a tension/opportunity slide, build the argument, close with a pointed call-to-action or positioning statement.
+>
+> **What NOT to do:** Don't put speaker asides on the slide (callout boxes that feel like notes — those go in Speaker Notes). Don't reference any prior conversation, email, or meeting unless the user explicitly authorised it. Don't pad — if you can say it in 12 slides, don't write 18.
+
+Spawn this agent in the foreground — wait for its output.
+
+When the agent returns:
+- Read `current.md` and verify the slide count, layouts used, and tone match the user's brief
+- Show the user the resulting outline (action titles only) and ask: **"Outline looks right? (yes / revise)"**
+- Iterate until yes
+
+If `markdown/current.md` already exists from a previous run, move it to `markdown/previous/v<N>-<timestamp>.md` first and append a DELTA.md entry.
+
+The strategist's output uses this format:
 
 ```markdown
 ---
