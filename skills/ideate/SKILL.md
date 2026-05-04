@@ -1,9 +1,26 @@
 ---
 name: ideate
-description: Use when the user wants to create a pitch deck, slide deck, board deck, or presentation from raw context (emails, briefs, notes, source material). Guides them through a structured wizard - context gathering, design selection from pre-built McKinsey-style variations, intent capture, markdown source-of-truth generation, HTML rendering, content-alignment validation, and PDF export. Triggers on phrases like "make a pitch deck", "create a slide deck", "ideate a deck", "/ideate", or any request to turn source material into presentation slides.
+description: Use when the user wants to create a pitch deck, slide deck, board deck, or presentation from raw context (emails, briefs, notes, source material). Guides them through a structured wizard - context gathering, design selection from pre-built McKinsey-style variations, intent capture, markdown source-of-truth generation, HTML rendering, pixel-perfect content-alignment validation, and PDF export. Supports power-user shortcuts: `quick`, `from-md`, `regenerate`, `export`, `switch-design`, `check-fit`. Triggers on phrases like "make a pitch deck", "create a slide deck", "ideate a deck", "/ideate", or any request to turn source material into presentation slides.
 ---
 
 # ideate — McKinsey-style deck wizard
+
+## Power-user shortcuts (parse the user's invocation BEFORE starting the wizard)
+
+If the user's message matches one of these patterns, jump directly to the matching flow instead of running the full 13-step wizard.
+
+| Pattern | Flow |
+|---|---|
+| `/ideate quick "<topic>" "<audience>"` or `quick deck about <topic> for <audience>` | **Quick mode** — minimal Q&A, sensible defaults (mckinsey-classic, explore tone, 12 slides). Skip Steps 4–8 by inferring; ask only for confirmation. |
+| `/ideate from-md <path>` or `build a deck from <path.md>` | **From-markdown mode** — skip wizard entirely, run `compile.js` directly with the design declared in the markdown's frontmatter. Then validate fit and export. |
+| `/ideate regenerate` (inside a project) | **Regenerate** — read `markdown/current.md`, compile to a new versioned HTML. No content changes. |
+| `/ideate export` (inside a project) | **Export only** — find the latest HTML in `html/`, run `export-pdf.sh`, write to `pdf/`. |
+| `/ideate switch-design <name>` (inside a project) | **Switch design** — update `.ideate/design-choice.md`, recompile HTML with the new design, validate fit. No content changes. |
+| `/ideate check-fit [<html>]` | **Fit check only** — run `check-overflow.js` against the given HTML or the latest in `html/`. |
+| `/ideate list-designs` | **List designs** — print the design INDEX.md table. |
+| `/ideate help` | Print this shortcut table to the user. |
+
+Default if no shortcut matches: run the full 13-step wizard from Step 0.
 
 You are guiding the user through building a presentation deck from raw context. This skill operates as a **conversational wizard**: ask one question at a time, wait for the user's answer, then move on. Do not batch questions. Do not skip steps. The user's answers are the source of truth — never invent content they did not provide.
 
@@ -151,34 +168,58 @@ The available `layout` types are documented in `slide-types.md`. Use only those 
 
 If `markdown/current.md` already exists (a re-run), move it to `markdown/previous/v<N>-<timestamp>.md` first, then append a new entry to `DELTA.md` describing what changed. Increment `version_count` in `.ideate/project.json`.
 
-## Step 10 — Render to HTML
+## Step 10 — Compile markdown → HTML
 
-Read the chosen design template from `~/.claude/skills/ideate/designs/<choice>/template.html`. The template uses placeholder tokens — substitute them with content from the markdown. Apply any user overrides from `.ideate/design-choice.md`.
+The skill ships with a deterministic Node compiler. Run:
 
-Write the result to `./<deck-name>/html/v<N>-<timestamp>.html`.
+```bash
+node ~/.claude/skills/ideate/scripts/compile.js \
+  ./<deck-name>/markdown/current.md \
+  <design-choice> \
+  ./<deck-name>/html/v<N>-<timestamp>.html
+```
 
-## Step 11 — Content-alignment validation (REQUIRED — DO NOT SKIP)
+This reads the markdown, picks up the chosen design's tokens from `designs/<name>/design.json`, and emits a single self-contained HTML file. Zero npm dependencies.
 
-This is the gating check. The user has been burned by content overflowing slides before. After rendering, you **must** verify content fits.
+If the user has applied overrides in `.ideate/design-choice.md` that the compiler doesn't natively support, fall back to in-Claude rendering: read the master template, substitute tokens manually, write the file.
 
-**Validation procedure:**
+## Step 11 — Pixel-perfect overflow detection (REQUIRED — DO NOT SKIP)
 
-1. Read the rendered HTML.
-2. For each slide, estimate content density using these heuristics:
-   - **h1.action** longer than 140 characters → flag
-   - More than 14 list items inside a single column → flag
-   - Matrix table with more than 6 rows → flag
-   - Body paragraphs longer than 280 characters in a single block → flag
-   - More than 3 stacked components (h1 + table + callout + grid) in one slide → flag
-3. If any slide flags, fix it before declaring done. Strategies:
-   - Split content across two slides
-   - Tighten language (cut filler words)
-   - Move long content to speaker notes
-   - Reduce font size on that specific slide
-4. After fixes, re-validate. Repeat until zero flags.
-5. Optional secondary check (if Chrome is available): run `scripts/check-fit.sh <html>` which uses headless Chrome to actually render at 1280×720 and screenshot each slide for visual inspection.
+This is the gating check. Run the real overflow detector:
 
-Tell the user: **"Validated content fit on all <N> slides. Ready to export PDF."**
+```bash
+node ~/.claude/skills/ideate/scripts/check-overflow.js \
+  ./<deck-name>/html/v<N>-<timestamp>.html
+```
+
+The detector spawns headless Chrome, navigates to the rendered HTML, waits for fonts to load, then for every `.slide` element measures:
+- `scrollHeight − clientHeight` (vertical overflow)
+- `scrollWidth − clientWidth` (horizontal overflow)
+- Any descendant whose `getBoundingClientRect().bottom` extends past the slide's bottom
+
+It emits a JSON report to stdout and exits 0 (pass) or 1 (fail).
+
+**If any slide fails:**
+1. Parse the JSON report. The `failures` array names each offending slide and lists the top 5 offenders by tag, class, text snippet, and overshoot in pixels.
+2. Edit `markdown/current.md` to fix the offending slide:
+   - Tighten action title (cut filler words)
+   - Drop bullets to fit the layout's component constraint (see `slide-types.md`)
+   - Move long body content to speaker notes
+   - Split into two slides if the layout is fundamentally too dense
+3. Recompile (Step 10) and re-check. Repeat until exit 0.
+
+**Fallback when Node or Chrome are missing:**
+- If `node` is unavailable, use the textual heuristics below (h1 length, list count, matrix rows, etc.)
+- If Chrome is unavailable, the script will fail gracefully — fall back to heuristics.
+
+**Textual fallback heuristics (one-time scan, in addition to or instead of pixel check):**
+- `h1.action` longer than 140 characters → flag
+- More than 14 list items inside a single column → flag
+- Matrix table with more than 6 rows → flag
+- Body paragraphs longer than 280 characters in a single block → flag
+- More than 3 stacked components in one slide → flag
+
+Tell the user: **"Pixel-perfect fit verified on all <N> slides. Ready to export PDF."**
 
 ## Step 12 — PDF export
 

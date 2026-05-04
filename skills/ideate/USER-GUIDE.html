@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>ideate — One-page User Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#0E1B2C; --ink-soft:#1F2D3F; --paper:#FAF9F7; --paper-2:#F2EFE9;
+  --rule:#E2DED5; --muted:#6B7280; --muted-2:#9CA3AF;
+  --accent:#E0301E; --accent-deep:#A8200F;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --display:'Fraunces',serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.5}
+body{padding:64px 48px 96px;max-width:1180px;margin:0 auto}
+
+header{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:28px;border-bottom:2px solid var(--ink);margin-bottom:48px}
+header .left{display:flex;flex-direction:column;gap:6px}
+header .eyebrow{font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:12px}
+header .eyebrow::after{content:"";width:36px;height:1.5px;background:var(--accent);opacity:0.5}
+header h1{font-family:var(--display);font-weight:300;font-size:64px;line-height:1;letter-spacing:-0.03em;color:var(--ink);font-variation-settings:"opsz" 144}
+header h1 em{font-style:italic;color:var(--accent-deep);font-weight:400}
+header .right{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);text-align:right}
+header .right .v{color:var(--ink);font-family:var(--display);font-weight:400;font-size:14px;text-transform:none;letter-spacing:0;margin-top:4px}
+
+.lead{font-size:18px;line-height:1.55;color:var(--ink-soft);max-width:800px;margin-bottom:48px;font-weight:400}
+.lead b{font-weight:600;color:var(--ink)}
+
+section{margin-bottom:48px}
+section .stitle{display:flex;align-items:baseline;gap:18px;margin-bottom:18px}
+section .stitle .num{font-family:var(--display);font-weight:300;font-size:38px;color:var(--accent);letter-spacing:-0.02em;line-height:1}
+section .stitle h2{font-family:var(--body);font-weight:600;font-size:22px;letter-spacing:-0.018em;color:var(--ink);line-height:1.2}
+section .stitle .rule{flex:1;height:1px;background:var(--rule);margin-left:8px}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.card{border:1px solid var(--rule);background:var(--paper);padding:18px 20px;display:flex;flex-direction:column;gap:8px;border-top:2px solid var(--accent)}
+.card .h{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3}
+.card .b{font-size:13px;line-height:1.55;color:var(--ink-soft)}
+.card code{font-family:var(--mono);font-size:11.5px;background:var(--paper-2);padding:1px 6px;border-radius:3px;color:var(--accent-deep)}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+table thead th{text-align:left;padding:10px 12px 10px 0;font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border-bottom:1.5px solid var(--ink)}
+table tbody td{padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink-soft);line-height:1.5}
+table tbody td:first-child{font-weight:600;color:var(--ink);width:32%}
+table tbody td code{font-family:var(--mono);font-size:11.5px;background:var(--paper-2);padding:2px 6px;border-radius:3px;color:var(--accent-deep)}
+
+pre{background:var(--ink);color:#F2EFE6;padding:16px 20px;border-radius:6px;font-family:var(--mono);font-size:12px;line-height:1.6;overflow:auto;margin-top:8px}
+pre .c{color:#7AA0C4}
+pre .a{color:#F2A99F}
+
+.flow{display:flex;align-items:stretch;margin-top:8px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.flow .step{flex:1;padding:14px 16px;border-right:1px solid var(--rule)}
+.flow .step:last-child{border-right:none}
+.flow .step .n{font-family:var(--display);font-weight:300;font-size:24px;color:var(--accent);line-height:1}
+.flow .step .t{font-size:12.5px;font-weight:600;color:var(--ink);margin-top:4px;line-height:1.3}
+.flow .step .d{font-size:11px;line-height:1.45;color:var(--muted);margin-top:4px}
+
+.callout{border-left:3px solid var(--accent);padding:14px 18px;background:var(--paper-2);font-size:13px;line-height:1.55;color:var(--ink-soft);max-width:none;margin-top:12px}
+.callout b{color:var(--ink);font-weight:600}
+
+footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted-2)}
+footer .brand{font-weight:600;letter-spacing:0.16em;color:var(--ink-soft)}
+footer .brand span{color:var(--accent)}
+
+ul.tight{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:6px}
+ul.tight li{font-size:12.5px;line-height:1.5;color:var(--ink-soft);padding-left:14px;position:relative}
+ul.tight li::before{content:"";width:5px;height:5px;background:var(--accent);position:absolute;left:0;top:7px}
+
+@media print {
+  body{padding:32px}
+  pre{background:#fff;color:var(--ink);border:1px solid var(--rule)}
+  pre .c{color:var(--muted)} pre .a{color:var(--accent-deep)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="left">
+    <div class="eyebrow">User Guide · v1.0</div>
+    <h1><em>ideate</em></h1>
+  </div>
+  <div class="right">
+    McKinsey-style pitch-deck wizard for Claude Code
+    <div class="v">A skill · A plugin · A workflow</div>
+  </div>
+</header>
+
+<p class="lead"><b>ideate</b> turns raw context — emails, briefs, notes, source material — into versioned, McKinsey-aesthetic pitch decks through a guided conversational wizard. Every project gets a structured repo. Markdown is the source of truth. HTML is generated deterministically. Every slide is checked pixel-perfect for content overflow before you ship.</p>
+
+<!-- ──────────────── 01 — INSTALL ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">01</div><h2>Install</h2><div class="rule"></div></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="h">Personal skill (single user)</div>
+      <div class="b">Drop the skill into Claude Code's skills directory.</div>
+<pre><span class="c"># clone and copy</span>
+git clone &lt;repo-url&gt; /tmp/ideate
+cp -R /tmp/ideate/skills/ideate ~/.claude/skills/</pre>
+    </div>
+    <div class="card">
+      <div class="h">Plugin (shareable across team)</div>
+      <div class="b">Install as a Claude Code plugin from a git remote.</div>
+<pre><span class="c"># manual</span>
+git clone &lt;repo-url&gt; ~/.claude/plugins/ideate
+
+<span class="c"># or via marketplace (if added)</span>
+claude plugin add &lt;git-url&gt;</pre>
+    </div>
+  </div>
+  <div class="callout"><b>Requirements.</b> Claude Code (CLI / VS Code / JetBrains / web). Node.js (for compile + overflow detector). Google Chrome / Chromium / Edge (for PDF export + pixel-perfect fit check).</div>
+</section>
+
+<!-- ──────────────── 02 — THE WIZARD ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">02</div><h2>The thirteen-step wizard</h2><div class="rule"></div></div>
+  <p class="b" style="font-size:13.5px;color:var(--ink-soft);max-width:880px">Type <code style="font-family:var(--mono);background:var(--paper-2);padding:1px 6px;border-radius:3px;color:var(--accent-deep)">/ideate</code> or just say "make a pitch deck". Claude asks one question at a time and builds the deck step by step.</p>
+  <div class="flow" style="margin-top:18px">
+    <div class="step"><div class="n">00</div><div class="t">Project location</div><div class="d">New deck or continue existing</div></div>
+    <div class="step"><div class="n">01</div><div class="t">Scaffold repo</div><div class="d">context · markdown · html · pdf</div></div>
+    <div class="step"><div class="n">02</div><div class="t">Drop context</div><div class="d">Source material into <code>context/</code></div></div>
+    <div class="step"><div class="n">03</div><div class="t">Audience</div><div class="d">Who is the deck for</div></div>
+    <div class="step"><div class="n">04</div><div class="t">Intent</div><div class="d">Inform · persuade · propose</div></div>
+    <div class="step"><div class="n">05</div><div class="t">Takeaways</div><div class="d">3–5 things to remember</div></div>
+  </div>
+  <div class="flow" style="margin-top:0;border-top:none">
+    <div class="step"><div class="n">06</div><div class="t">Design</div><div class="d">Pick from 6 variations</div></div>
+    <div class="step"><div class="n">07</div><div class="t">Tone</div><div class="d">Explore · commit · formal</div></div>
+    <div class="step"><div class="n">08</div><div class="t">Outline</div><div class="d">Action-titled, 12–18 slides</div></div>
+    <div class="step"><div class="n">09</div><div class="t">Markdown</div><div class="d">Source of truth written</div></div>
+    <div class="step"><div class="n">10</div><div class="t">Compile</div><div class="d">Markdown → HTML</div></div>
+    <div class="step"><div class="n">11</div><div class="t">Fit check</div><div class="d">Pixel-perfect overflow scan</div></div>
+  </div>
+  <div class="flow" style="margin-top:0;border-top:none">
+    <div class="step"><div class="n">12</div><div class="t">Export PDF</div><div class="d">Headless Chrome · 1280×720</div></div>
+    <div class="step"><div class="n">13</div><div class="t">Done</div><div class="d">Iterate from <code>current.md</code> any time</div></div>
+    <div class="step" style="background:var(--paper-2)"><div class="n" style="color:var(--ink)">∞</div><div class="t">Re-entry</div><div class="d">Run inside the project for a shorter menu</div></div>
+    <div class="step" style="background:var(--paper-2)"><div class="n" style="color:var(--ink)">⇄</div><div class="t">Versioned</div><div class="d">previous/ + DELTA.md</div></div>
+    <div class="step" style="background:var(--paper-2)"><div class="n" style="color:var(--ink)">±</div><div class="t">Editable</div><div class="d">Edit md and "regenerate"</div></div>
+    <div class="step" style="background:var(--paper-2)"><div class="n" style="color:var(--ink)">✓</div><div class="t">Atomic</div><div class="d">Each version timestamped</div></div>
+  </div>
+</section>
+
+<!-- ──────────────── 03 — REPO STRUCTURE ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">03</div><h2>What gets created on disk</h2><div class="rule"></div></div>
+<pre><span class="c"># every deck project lives in its own folder</span>
+&lt;deck-name&gt;/
+├── .ideate/                 <span class="c"># state, design choice, version count</span>
+├── <span class="a">context/</span>                 <span class="c"># YOU drop source material here</span>
+├── assets/                  <span class="c"># images, screenshots, logos</span>
+├── markdown/
+│   ├── current.md           <span class="c"># SOURCE OF TRUTH — edit this directly to iterate</span>
+│   ├── previous/            <span class="c"># versioned snapshots, timestamped</span>
+│   └── DELTA.md             <span class="c"># changelog: what changed across versions</span>
+├── html/                    <span class="c"># compiled, timestamped HTML versions</span>
+└── pdf/                     <span class="c"># exported PDFs, timestamped</span></pre>
+  <div class="callout"><b>Why markdown is the source of truth.</b> The HTML is always derivable from the markdown. To iterate on content, edit <code>markdown/current.md</code> directly and ask Claude to "regenerate". You don't have to re-run the wizard.</div>
+</section>
+
+<!-- ──────────────── 04 — DESIGNS ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">04</div><h2>Six design variations</h2><div class="rule"></div></div>
+  <table>
+    <thead><tr><th>Design</th><th>Aesthetic</th><th>Best for</th></tr></thead>
+    <tbody>
+      <tr><td>mckinsey-classic</td><td>Editorial serif (Fraunces) on warm paper, navy + restrained red, action-titled</td><td>Strategy decks, partnership proposals, board pitches</td></tr>
+      <tr><td>mckinsey-sleek</td><td>All-Inter sans, no italic serif, same warm palette</td><td>Modern strategy decks, executive proposals</td></tr>
+      <tr><td>bcg-monochrome</td><td>Almost-black on cream, accent green, generous whitespace</td><td>Diagnostic / data-led decks, consulting reports</td></tr>
+      <tr><td>bain-bold</td><td>Strong red verticals, charcoal headlines, large stat callouts</td><td>Sales decks, investor updates, growth pitches</td></tr>
+      <tr><td>editorial-noir</td><td>Dark charcoal, ivory text, serif display, warm gold accent</td><td>High-impact opening / closing decks</td></tr>
+      <tr><td>modern-minimal</td><td>Off-white, charcoal, single cobalt accent, sans throughout</td><td>Startup pitches, product launches</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><b>Add your own.</b> Drop a folder under <code>designs/</code> with a <code>design.json</code> that defines tokens (palette, fonts, spacing). The skill picks it up on the next invocation.</div>
+</section>
+
+<!-- ──────────────── 05 — POWER USER ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">05</div><h2>Power-user shortcuts</h2><div class="rule"></div></div>
+  <p class="b" style="font-size:13.5px;color:var(--ink-soft);max-width:880px">Skip the full wizard for common cases. Each shortcut maps to a specific flow.</p>
+  <table>
+    <thead><tr><th>Shortcut</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><code>/ideate quick "topic" "audience"</code></td><td>Minimal Q&amp;A, sensible defaults (mckinsey-classic, explore tone, 12 slides). For when you need a deck in two minutes.</td></tr>
+      <tr><td><code>/ideate from-md path/to/file.md</code></td><td>Skip the wizard entirely. Use existing markdown. Run <code>compile.js</code> directly.</td></tr>
+      <tr><td><code>/ideate regenerate</code></td><td>Inside a project — re-compile <code>markdown/current.md</code> to a new versioned HTML.</td></tr>
+      <tr><td><code>/ideate export</code></td><td>Inside a project — export the latest HTML to PDF. Nothing else.</td></tr>
+      <tr><td><code>/ideate switch-design &lt;name&gt;</code></td><td>Inside a project — change design and recompile. No content changes.</td></tr>
+      <tr><td><code>/ideate check-fit [&lt;html&gt;]</code></td><td>Run pixel-perfect overflow detector against an HTML file (defaults to latest).</td></tr>
+      <tr><td><code>/ideate list-designs</code></td><td>Print the design catalogue.</td></tr>
+      <tr><td><code>/ideate help</code></td><td>Print the shortcut table.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ──────────────── 06 — UNDER THE HOOD ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">06</div><h2>What the scripts do</h2><div class="rule"></div></div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="h">compile.js</div>
+      <div class="b">Deterministic markdown → HTML. Reads the structured markdown, picks the design's tokens, emits a single self-contained HTML file. Zero npm deps.</div>
+<pre style="font-size:11px"><span class="c"># usage</span>
+node compile.js \
+  &lt;markdown.md&gt; \
+  &lt;design-name&gt; \
+  &lt;out.html&gt;</pre>
+    </div>
+    <div class="card">
+      <div class="h">check-overflow.js</div>
+      <div class="b">Pixel-perfect content fit check. Spawns headless Chrome via raw CDP (no puppeteer dep), measures every <code>.slide</code> for vertical/horizontal overflow + offending descendants. Exits 1 if anything overflows.</div>
+<pre style="font-size:11px"><span class="c"># usage</span>
+node check-overflow.js &lt;in.html&gt;</pre>
+    </div>
+    <div class="card">
+      <div class="h">export-pdf.sh</div>
+      <div class="b">Headless Chrome to PDF. 1280×720 page size, zero margins, no header/footer, background graphics on. Auto-detects Chrome / Chromium / Edge.</div>
+<pre style="font-size:11px"><span class="c"># usage</span>
+./export-pdf.sh &lt;in.html&gt; &lt;out.pdf&gt;</pre>
+    </div>
+  </div>
+  <div class="callout"><b>The fit check is gating.</b> Step 11 of the wizard runs <code>check-overflow.js</code> after compile. If any slide overflows, Claude tightens the markdown automatically and recompiles. The deck never ships with overflowing content.</div>
+</section>
+
+<!-- ──────────────── 07 — TONE PRESETS ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">07</div><h2>Tone presets</h2><div class="rule"></div></div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="h">explore</div>
+      <div class="b">Exploratory partnership / early conversation. Soft asks, "could", "might", "draft", "indicative". No hard commitments.</div>
+    </div>
+    <div class="card">
+      <div class="h">commit</div>
+      <div class="b">Confident proposal. Concrete metrics, clear asks, definite verbs ("delivers", "drives", "lifts"). Used when the relationship is established.</div>
+    </div>
+    <div class="card">
+      <div class="h">formal</div>
+      <div class="b">Board / regulator / committee. Third-person, evidence-led, conservative numbers. Every claim sourced. No flourishes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────── 08 — ITERATION ──────────────── -->
+<section>
+  <div class="stitle"><div class="num">08</div><h2>Iterating on a deck</h2><div class="rule"></div></div>
+  <ul class="tight">
+    <li><b>Edit markdown directly.</b> Open <code>markdown/current.md</code>, change content, ask Claude to "regenerate" — or run <code>node compile.js</code> yourself.</li>
+    <li><b>Switch design without losing content.</b> <code>/ideate switch-design bain-bold</code> recompiles the same markdown with the new design.</li>
+    <li><b>Versioning is automatic.</b> Every recompile moves the previous markdown into <code>markdown/previous/</code> with a timestamp. <code>DELTA.md</code> records what changed.</li>
+    <li><b>Re-run the wizard inside an existing project</b> for a shorter menu — iterate content, switch design, regenerate, or export.</li>
+  </ul>
+</section>
+
+<footer>
+  <div class="brand">my<span>SATHI</span> · ideate</div>
+  <div>One-page guide · v1.0 · Open source under MIT</div>
+</footer>
+
+</body>
+</html>
