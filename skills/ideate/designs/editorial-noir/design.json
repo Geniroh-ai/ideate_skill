@@ -1,0 +1,25 @@
+{
+  "name": "editorial-noir",
+  "tagline": "Dark charcoal background, ivory text, serif display, warm gold accent.",
+  "tokens": {
+    "ink": "#F2EFE6",
+    "ink_soft": "#D8D5CC",
+    "paper": "#141414",
+    "paper_2": "#1F1F1F",
+    "rule": "#2E2E2E",
+    "rule_strong": "#454545",
+    "muted": "#8A8579",
+    "muted_2": "#65615A",
+    "accent": "#D4A574",
+    "accent_deep": "#A87E48",
+    "warm": "#D4A574"
+  },
+  "fonts": {
+    "display": "Fraunces",
+    "body": "Inter",
+    "google_url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap",
+    "headline_font": "Fraunces",
+    "headline_weight": 400
+  },
+  "slide": { "width": 1280, "height": 720, "pad_x": 80, "pad_y": 60 }
+}

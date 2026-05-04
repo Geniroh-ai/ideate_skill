@@ -1,0 +1,25 @@
+{
+  "name": "modern-minimal",
+  "tagline": "Off-white, charcoal, single cobalt accent. Sans-serif throughout.",
+  "tokens": {
+    "ink": "#0F0F14",
+    "ink_soft": "#1F1F2E",
+    "paper": "#FAFAFA",
+    "paper_2": "#F0F0F2",
+    "rule": "#E1E1E5",
+    "rule_strong": "#B5B5BC",
+    "muted": "#5E5E68",
+    "muted_2": "#9A9AA3",
+    "accent": "#1F47FF",
+    "accent_deep": "#0F2FBF",
+    "warm": "#FF8A3D"
+  },
+  "fonts": {
+    "display": "Inter",
+    "body": "Inter",
+    "google_url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
+    "headline_font": "Inter",
+    "headline_weight": 600
+  },
+  "slide": { "width": 1280, "height": 720, "pad_x": 80, "pad_y": 64 }
+}

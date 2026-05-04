@@ -1,0 +1,25 @@
+{
+  "name": "mckinsey-classic",
+  "tagline": "Editorial serif headlines on warm paper. Navy + BC red. Action-titled.",
+  "tokens": {
+    "ink": "#0E1B2C",
+    "ink_soft": "#1F2D3F",
+    "paper": "#FAF9F7",
+    "paper_2": "#F2EFE9",
+    "rule": "#E2DED5",
+    "rule_strong": "#C9C4B7",
+    "muted": "#6B7280",
+    "muted_2": "#9CA3AF",
+    "accent": "#E0301E",
+    "accent_deep": "#A8200F",
+    "warm": "#C4915A"
+  },
+  "fonts": {
+    "display": "Fraunces",
+    "body": "Inter",
+    "google_url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap",
+    "headline_font": "Inter",
+    "headline_weight": 600
+  },
+  "slide": { "width": 1280, "height": 720, "pad_x": 72, "pad_y": 54 }
+}

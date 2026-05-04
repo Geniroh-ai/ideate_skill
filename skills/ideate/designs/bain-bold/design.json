@@ -1,0 +1,25 @@
+{
+  "name": "bain-bold",
+  "tagline": "Strong red verticals, charcoal headlines, large stat callouts.",
+  "tokens": {
+    "ink": "#1B1B1B",
+    "ink_soft": "#333333",
+    "paper": "#FFFFFF",
+    "paper_2": "#F4F4F4",
+    "rule": "#DDDDDD",
+    "rule_strong": "#B0B0B0",
+    "muted": "#666666",
+    "muted_2": "#9A9A9A",
+    "accent": "#CC0000",
+    "accent_deep": "#990000",
+    "warm": "#F2C200"
+  },
+  "fonts": {
+    "display": "Inter",
+    "body": "Inter",
+    "google_url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
+    "headline_font": "Inter",
+    "headline_weight": 800
+  },
+  "slide": { "width": 1280, "height": 720, "pad_x": 72, "pad_y": 56 }
+}

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>mySATHI × British Council Education India</title>
+<meta name="viewport" content="width=1280, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --ink:#0E1B2C;
+  --ink-soft:#1F2D3F;
+  --paper:#FAF9F7;
+  --paper-2:#F2EFE9;
+  --rule:#E2DED5;
+  --rule-strong:#C9C4B7;
+  --muted:#6B7280;
+  --muted-2:#9CA3AF;
+  --accent:#E0301E;          /* British Council red, used sparingly */
+  --accent-deep:#A8200F;
+  --warm:#C4915A;            /* warm editorial accent */
+  --slide-w:1280px;
+  --slide-h:720px;
+  --pad-x:72px;
+  --pad-y:54px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#1A1A1A;color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"ss01","cv11";}
+body{padding:40px 0;display:flex;flex-direction:column;align-items:center;gap:32px}
+
+.deck{display:flex;flex-direction:column;gap:32px}
+
+.slide{
+  width:var(--slide-w);
+  height:var(--slide-h);
+  background:var(--paper);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,0.35),0 4px 12px rgba(0,0,0,0.2);
+  display:flex;
+  flex-direction:column;
+  padding:var(--pad-y) var(--pad-x);
+}
+
+/* ── header / footer chrome ────────────────────────── */
+.s-header{
+  position:absolute;top:32px;left:var(--pad-x);right:var(--pad-x);
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);
+}
+.s-header .label{display:flex;align-items:center;gap:14px}
+.s-header .label::before{
+  content:"";width:24px;height:1.5px;background:var(--accent);display:inline-block;
+}
+.s-header .meta{color:var(--muted-2);letter-spacing:0.16em}
+
+.s-footer{
+  position:absolute;bottom:28px;left:var(--pad-x);right:var(--pad-x);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10.5px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted-2);
+  padding-top:14px;border-top:1px solid var(--rule);
+}
+.s-footer .brand{font-weight:600;letter-spacing:0.16em;color:var(--ink-soft)}
+.s-footer .brand span{color:var(--accent)}
+.s-footer .pgnum{font-family:'Fraunces',serif;font-size:13px;font-weight:400;letter-spacing:0.04em;text-transform:none;color:var(--ink-soft)}
+
+/* ── typography ────────────────────────────────────── */
+.eyebrow{
+  font-size:10.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:16px;display:inline-flex;align-items:center;gap:12px;
+}
+.eyebrow::after{content:"";width:36px;height:1.5px;background:var(--accent);opacity:0.5}
+
+h1.action{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:600;
+  font-size:30px;
+  line-height:1.22;
+  letter-spacing:-0.022em;
+  color:var(--ink);
+  max-width:1040px;
+}
+h1.action em{font-style:normal;color:var(--accent-deep);font-weight:600}
+h1.action b{font-weight:700;color:var(--ink)}
+
+h2.action{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:600;
+  font-size:32px;
+  line-height:1.22;
+  letter-spacing:-0.022em;
+  color:var(--ink);
+}
+h2.action em{font-style:normal;color:var(--accent-deep);font-weight:600}
+
+.subtitle{
+  font-size:14px;line-height:1.5;color:var(--muted);max-width:820px;margin-top:12px;font-weight:400;
+}
+
+.body-md{font-size:12.5px;line-height:1.5;color:var(--ink-soft);font-weight:400}
+.body-sm{font-size:11.5px;line-height:1.45;color:var(--muted);font-weight:400}
+
+.kicker{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)}
+
+.divider{height:1px;background:var(--rule);width:100%;margin:18px 0}
+.divider-strong{height:2px;background:var(--ink);width:48px;margin:14px 0 22px}
+
+/* ── shared content area ───────────────────────────── */
+.content{flex:1;display:flex;flex-direction:column;justify-content:flex-start;margin-top:36px;min-height:0;overflow:hidden}
+
+/* ── numerical callout ─────────────────────────────── */
+.bignum{
+  font-family:'Fraunces',serif;
+  font-weight:300;
+  font-size:84px;
+  line-height:0.95;
+  color:var(--ink);
+  letter-spacing:-0.04em;
+  font-variation-settings:"opsz" 144;
+}
+.bignum sup{font-size:32px;font-weight:400;color:var(--accent);vertical-align:top;margin-left:4px;line-height:1}
+.bignum-label{font-size:12px;color:var(--muted);line-height:1.45;margin-top:10px;font-weight:500;max-width:220px}
+
+/* ── three column ──────────────────────────────────── */
+.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:8px}
+.cols-2{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:8px}
+.cols-4{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:8px}
+
+.col-card{display:flex;flex-direction:column;gap:10px}
+.col-card .col-num{
+  font-family:'Fraunces',serif;font-weight:300;font-size:28px;color:var(--accent);
+  line-height:1;letter-spacing:-0.02em;
+}
+.col-card .col-title{
+  font-size:14px;font-weight:600;color:var(--ink);line-height:1.3;
+}
+.col-card .col-rule{height:1px;background:var(--rule);width:100%;margin:2px 0}
+.col-card .col-body{font-size:11.5px;line-height:1.5;color:var(--ink-soft)}
+.col-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.col-card ul li{
+  font-size:11.5px;line-height:1.45;color:var(--ink-soft);padding-left:12px;position:relative;
+}
+.col-card ul li::before{
+  content:"";width:4px;height:4px;background:var(--accent);position:absolute;left:0;top:6px;
+}
+
+/* ── pill / tag ────────────────────────────────────── */
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 12px;border:1px solid var(--rule-strong);border-radius:999px;
+  font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--ink-soft);
+  background:var(--paper);
+}
+.pill.dot::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* ── matrix table ──────────────────────────────────── */
+table.matrix{
+  width:100%;border-collapse:collapse;margin-top:8px;font-size:11.5px;
+}
+table.matrix thead th{
+  text-align:left;padding:10px 12px 10px 0;font-size:9.5px;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1.5px solid var(--ink);background:transparent;
+}
+table.matrix tbody td{
+  padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top;
+  color:var(--ink-soft);line-height:1.4;
+}
+table.matrix tbody td:first-child{
+  font-weight:600;color:var(--ink);
+}
+table.matrix tbody tr:hover{background:var(--paper-2)}
+.tag-bc{display:inline-block;padding:3px 8px;border-radius:3px;background:#FCE9E6;color:var(--accent-deep);font-size:10.5px;font-weight:600;letter-spacing:0.04em}
+.tag-ms{display:inline-block;padding:3px 8px;border-radius:3px;background:#E5EAF1;color:var(--ink);font-size:10.5px;font-weight:600;letter-spacing:0.04em}
+
+/* ── flow / process ────────────────────────────────── */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:18px}
+.flow .step{
+  flex:1;padding:14px 18px 14px 18px;border-left:2px solid var(--rule);position:relative;background:transparent;
+}
+.flow .step.active{border-left-color:var(--accent);background:linear-gradient(90deg,rgba(224,48,30,0.04),transparent 70%)}
+.flow .step .step-num{
+  font-family:'Fraunces',serif;font-weight:400;font-size:11.5px;color:var(--accent);letter-spacing:0.04em;
+}
+.flow .step .step-title{
+  font-size:12.5px;font-weight:600;color:var(--ink);margin-top:4px;line-height:1.3;
+}
+.flow .step .step-body{font-size:10.5px;line-height:1.45;color:var(--muted);margin-top:4px}
+
+/* ── 4C diagram ────────────────────────────────────── */
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
+.cbox{
+  border:1px solid var(--rule);background:var(--paper);padding:16px 18px 16px;display:flex;flex-direction:column;gap:5px;position:relative;
+}
+.cbox::before{
+  content:"";position:absolute;top:0;left:0;width:36px;height:2px;background:var(--accent);
+}
+.cbox .ch{font-family:'Fraunces',serif;font-weight:400;font-size:18px;color:var(--ink);letter-spacing:-0.01em;line-height:1.1}
+.cbox .csub{font-size:11px;color:var(--muted);line-height:1.45}
+.cbox .ctag{
+  font-size:9.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1px;
+}
+
+/* ── stat row ──────────────────────────────────────── */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:8px;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+.stat-row .stat{padding:18px 18px 18px 0;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:6px}
+.stat-row .stat:last-child{border-right:none}
+.stat-row .stat .v{font-family:'Fraunces',serif;font-weight:300;font-size:34px;line-height:1;color:var(--ink);letter-spacing:-0.03em}
+.stat-row .stat .v sup{font-size:14px;color:var(--accent);font-weight:400;vertical-align:top;margin-left:2px}
+.stat-row .stat .l{font-size:11px;color:var(--muted);line-height:1.4;font-weight:500}
+
+/* ── section divider slide ─────────────────────────── */
+.slide.section-divider{
+  background:var(--ink);
+  color:var(--paper);
+  padding:var(--pad-y) var(--pad-x);
+}
+.slide.section-divider .s-header,
+.slide.section-divider .s-footer{color:rgba(250,249,247,0.5);border-top-color:rgba(250,249,247,0.12)}
+.slide.section-divider .s-footer .brand{color:rgba(250,249,247,0.85)}
+.slide.section-divider .s-footer .pgnum{color:rgba(250,249,247,0.85)}
+.slide.section-divider .section-num{
+  font-family:'Fraunces',serif;font-weight:300;font-size:220px;line-height:0.85;letter-spacing:-0.05em;
+  color:rgba(250,249,247,0.92);
+}
+.slide.section-divider .section-name{
+  font-family:'Fraunces',serif;font-weight:300;font-size:52px;line-height:1.08;letter-spacing:-0.025em;
+  color:var(--paper);margin-top:20px;max-width:880px;
+}
+.slide.section-divider .section-name em{font-style:italic;color:#F2A99F}
+.slide.section-divider .section-rail{
+  position:absolute;left:var(--pad-x);bottom:120px;display:flex;align-items:center;gap:14px;
+  font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);
+}
+.slide.section-divider .section-rail::before{content:"";width:48px;height:1.5px;background:var(--accent)}
+.slide.section-divider .section-content{
+  display:flex;flex-direction:column;justify-content:center;height:100%;padding-top:40px;
+}
+
+/* ── title slide ───────────────────────────────────── */
+.slide.title-slide{
+  background:var(--paper);
+  padding:0;
+}
+.title-slide .top-rail{
+  position:absolute;top:48px;left:var(--pad-x);right:var(--pad-x);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);
+}
+.title-slide .top-rail .left{display:flex;align-items:center;gap:14px}
+.title-slide .top-rail .left::before{content:"";width:32px;height:1.5px;background:var(--accent)}
+.title-slide .top-rail .right{color:var(--muted);font-weight:500;letter-spacing:0.16em}
+
+.title-slide .body{
+  height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad-x);
+}
+.title-slide .multiply{
+  font-family:'Fraunces',serif;font-weight:300;font-size:24px;color:var(--accent);letter-spacing:0.04em;margin-bottom:18px;
+}
+.title-slide .multiply span{color:var(--ink);font-style:italic}
+.title-slide h1{
+  font-family:'Fraunces',serif;font-weight:300;font-size:72px;line-height:1;letter-spacing:-0.032em;color:var(--ink);
+  font-variation-settings:"opsz" 144;
+}
+.title-slide h1 em{font-style:italic;color:var(--accent-deep);font-weight:400}
+.title-slide h1 .ampersand{font-style:italic;font-weight:300;color:var(--accent)}
+.title-slide .lead{
+  font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:820px;margin-top:24px;font-weight:400;
+}
+.title-slide .lead b{font-weight:600;color:var(--ink)}
+
+.title-slide .meta-bar{
+  position:absolute;bottom:64px;left:var(--pad-x);right:var(--pad-x);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding-top:24px;border-top:1px solid var(--rule);
+}
+.title-slide .meta-bar .col{display:flex;flex-direction:column;gap:6px}
+.title-slide .meta-bar .col .label{font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.title-slide .meta-bar .col .val{font-size:14px;color:var(--ink);font-weight:500}
+.title-slide .meta-bar .col .val em{font-style:italic;font-family:'Fraunces',serif;font-weight:400;color:var(--ink-soft)}
+
+/* ── closing slide ─────────────────────────────────── */
+.slide.closing{background:var(--paper);}
+.closing .center-col{
+  height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:0 120px;
+}
+.closing .quote{
+  font-family:'Fraunces',serif;font-weight:300;font-size:44px;line-height:1.18;letter-spacing:-0.02em;color:var(--ink);
+  font-variation-settings:"opsz" 144;
+}
+.closing .quote em{font-style:italic;color:var(--accent-deep);font-weight:400}
+.closing .quote-rule{width:48px;height:2px;background:var(--accent);margin:36px auto}
+.closing .signoff{font-size:13px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;font-weight:600}
+
+/* ── highlight callout ─────────────────────────────── */
+.callout{
+  border-left:3px solid var(--accent);padding:10px 16px;background:var(--paper-2);
+  font-size:11.5px;line-height:1.5;color:var(--ink-soft);max-width:780px;
+}
+.callout b{color:var(--ink);font-weight:600}
+
+/* ── icon list ─────────────────────────────────────── */
+.iconlist{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.iconlist .item{display:flex;gap:16px;align-items:flex-start}
+.iconlist .item .ico{
+  width:32px;height:32px;flex-shrink:0;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:14px;color:var(--ink);font-weight:400;
+}
+.iconlist .item .txt .t{font-size:13px;font-weight:600;color:var(--ink);line-height:1.3}
+.iconlist .item .txt .d{font-size:11.5px;color:var(--muted);line-height:1.45;margin-top:3px;max-width:880px}
+
+/* ── two-tone deliverable boxes ─────────────────────── */
+.deliverables{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.deliverable{
+  border:1px solid var(--rule);padding:13px 14px 14px;background:var(--paper);
+  display:flex;flex-direction:column;gap:5px;
+}
+.deliverable .dh{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3}
+.deliverable .dd{font-size:10.5px;color:var(--muted);line-height:1.45}
+.deliverable.priority{background:var(--ink);border-color:var(--ink)}
+.deliverable.priority .dh{color:var(--paper)}
+.deliverable.priority .dd{color:rgba(250,249,247,0.7)}
+
+/* ── source line ───────────────────────────────────── */
+.source{
+  position:absolute;left:var(--pad-x);right:var(--pad-x);bottom:64px;font-size:9.5px;color:var(--muted-2);font-style:italic;letter-spacing:0.02em;line-height:1.4;
+}
+
+/* ── PRINT / PDF ───────────────────────────────────── */
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+@media print {
+  html,body{background:#fff;padding:0;margin:0}
+  body{display:block;padding:0}
+  .deck{gap:0;display:block}
+  .slide{
+    box-shadow:none;
+    page-break-after:always;
+    break-after:page;
+    margin:0;
+  }
+  .slide:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+</head>
+
+<body>
+<div class="deck">
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 01  TITLE                                         -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide title-slide">
+  <div class="top-rail">
+    <div class="left">Confidential — for discussion</div>
+    <div class="right">May 2026 · New Delhi</div>
+  </div>
+
+  <div class="body">
+    <div class="multiply">mySATHI <span>×</span> British Council Education India</div>
+    <h1>A readiness <em>layer</em><br/>for UK exam pathways<br/>and global mobility.</h1>
+    <p class="lead">A capability-led, computer-adaptive assessment ecosystem that sits <b>before</b> exams, English &amp; professional skills training — exploring how it could complement British Council Education's B2B work across India.</p>
+  </div>
+
+  <div class="meta-bar">
+    <div class="col">
+      <span class="label">Prepared for</span>
+      <span class="val">British Council Education India <em>— Leadership team</em></span>
+    </div>
+    <div class="col">
+      <span class="label">Prepared by</span>
+      <span class="val">CL Educate <em>— mySATHI team</em></span>
+    </div>
+    <div class="col">
+      <span class="label">Purpose</span>
+      <span class="val"><em>Exploring ecosystem fit · draft pilot scope</em></span>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 02  AGENDA / WHAT WE'LL COVER                     -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">Agenda</div>
+    <div class="meta">01 / 14</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">What we'll cover</div>
+    <h1 class="action">Three questions, answered <em>in fifteen slides.</em></h1>
+
+    <div class="cols-3" style="margin-top:48px">
+      <div class="col-card">
+        <div class="col-num">01</div>
+        <div class="col-title">What is the readiness gap, and why does it matter to BC Education?</div>
+        <div class="col-rule"></div>
+        <div class="col-body">India's scale meets a capability ceiling. Marks travel; readiness doesn't.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-num">02</div>
+        <div class="col-title">How does mySATHI work — and where does it plug into your portfolio?</div>
+        <div class="col-rule"></div>
+        <div class="col-body">A 4Cs computer-adaptive engine that sits before exams, training and mobility flows.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-num">03</div>
+        <div class="col-title">What could a light-touch 3–6 month pilot look like — and what could we learn together?</div>
+        <div class="col-rule"></div>
+        <div class="col-body">An indicative scope across two BC verticals, shaped together, with mutual learning as the goal.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">01</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 03  SECTION DIVIDER : CONTEXT                     -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide section-divider">
+  <div class="s-header">
+    <div class="label" style="color:#F2A99F">Section one</div>
+    <div class="meta" style="color:rgba(250,249,247,0.45)">Context</div>
+  </div>
+
+  <div class="section-content">
+    <div class="section-rail">The Opportunity</div>
+    <div class="section-num">01</div>
+    <div class="section-name">India has the <em>scale.</em><br/>What's missing is the <em>readiness signal.</em></div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span style="color:#F2A99F">SATHI</span> × British Council Education India</div>
+    <div class="pgnum">02</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 04  THE OPPORTUNITY                               -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">01 · Context</div>
+    <div class="meta">03 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">The macro</div>
+    <h1 class="action">India has the world's largest pool of aspirants for UK pathways — but <em>marks travel, capability doesn't.</em></h1>
+
+    <div class="stat-row" style="margin-top:32px">
+      <div class="stat">
+        <div class="v">759K</div>
+        <div class="l">Indian students studying abroad in 2024 (Ministry of External Affairs)</div>
+      </div>
+      <div class="stat">
+        <div class="v">~98.9K</div>
+        <div class="l">Of which, Indian students enrolled in UK higher education in 2024</div>
+      </div>
+      <div class="stat">
+        <div class="v">~45%</div>
+        <div class="l">Global CFA Level I pass rate, May 2025 — a marker of how hard the exams BC delivers actually are</div>
+      </div>
+      <div class="stat">
+        <div class="v">2035</div>
+        <div class="l">UK–India Vision horizon — endorsed July 2025, with education as a flagship pillar</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="source">Sources: India MEA via The PIE News (Mar 2025); HESA / UK Home Office study-visa data 2024; CFA Institute press release, May 2025 results; UK–India Vision 2035 (gov.uk, Jul 2025).</div>
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">03</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 05  WHERE BC EDUCATION SITS                       -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">01 · Context</div>
+    <div class="meta">04 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">BC Education India today</div>
+    <h1 class="action">A B2B services backbone for UK exam delivery and English &amp; professional skills training.</h1>
+    <p class="subtitle">Three high-volume product lines, all of which share the same upstream constraint: candidate readiness before the exam or training programme begins.</p>
+
+    <div class="cols-3" style="margin-top:32px">
+      <div class="col-card">
+        <span class="kicker">Product line 01</span>
+        <div class="col-title" style="font-family:'Fraunces',serif;font-weight:400;font-size:18px;line-height:1.2;letter-spacing:-0.01em">UK exam delivery</div>
+        <div class="col-rule"></div>
+        <ul>
+          <li>CFA Institute</li>
+          <li>ACCA</li>
+          <li>Cambridge English</li>
+        </ul>
+        <div class="body-sm" style="margin-top:8px">Pass rates and candidate profile drive exam-board reputation in India.</div>
+      </div>
+      <div class="col-card">
+        <span class="kicker">Product line 02</span>
+        <div class="col-title" style="font-family:'Fraunces',serif;font-weight:400;font-size:18px;line-height:1.2;letter-spacing:-0.01em">English &amp; professional skills training</div>
+        <div class="col-rule"></div>
+        <ul>
+          <li>Corporate clients</li>
+          <li>University clients</li>
+          <li>BC Council content &amp; pedagogy</li>
+        </ul>
+        <div class="body-sm" style="margin-top:8px">Outcome credibility is gated by diagnostic accuracy at intake.</div>
+      </div>
+      <div class="col-card">
+        <span class="kicker">Adjacent</span>
+        <div class="col-title" style="font-family:'Fraunces',serif;font-weight:400;font-size:18px;line-height:1.2;letter-spacing:-0.01em">Mobility &amp; scholarships ecosystem</div>
+        <div class="col-rule"></div>
+        <ul>
+          <li>UK university partners</li>
+          <li>Scholarship programmes</li>
+          <li>Counselling &amp; outreach events</li>
+        </ul>
+        <div class="body-sm" style="margin-top:8px">Universities want capability evidence beyond marks — none exists at scale.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="source">Sources: British Council India public communications; CL Educate / mySATHI internal analysis.</div>
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">04</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 06  THE GAP / WHY IT MATTERS                      -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">01 · Context</div>
+    <div class="meta">05 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">The diagnostic gap</div>
+    <h1 class="action">Across all three lines, the same upstream layer is missing — a <em>capability-based readiness signal.</em></h1>
+
+    <table class="matrix" style="margin-top:32px">
+      <thead>
+        <tr>
+          <th style="width:24%">BC Education line</th>
+          <th style="width:30%">What is measured today</th>
+          <th style="width:22%">What is missing</th>
+          <th style="width:24%">What it costs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>UK exam delivery<br/><span class="tag-bc" style="margin-top:6px">CFA · ACCA · CamEng</span></td>
+          <td>Final exam scores, pass/fail at point of attempt</td>
+          <td>Pre-exam readiness diagnostic — who is ready, who needs prep</td>
+          <td>Potential drag on first-attempt pass rates, especially in Tier 2/3 cohorts</td>
+        </tr>
+        <tr>
+          <td>English &amp; professional skills training</td>
+          <td>Programme-end attainment levels</td>
+          <td>Granular intake diagnostic across the 4Cs</td>
+          <td>Limited ability to personalise delivery or quantify capability uplift for clients</td>
+        </tr>
+        <tr>
+          <td>Mobility / scholarships<br/><span class="tag-bc" style="margin-top:6px">UK partner universities</span></td>
+          <td>Marks, IELTS, transcripts</td>
+          <td>Capability signal — Critical Thinking, Collaboration, Communication</td>
+          <td>Universities filter on proxies; high-potential Tier 2 / 3 talent often goes unseen</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">05</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 07  SECTION DIVIDER : MYSATHI                     -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide section-divider">
+  <div class="s-header">
+    <div class="label" style="color:#F2A99F">Section two</div>
+    <div class="meta" style="color:rgba(250,249,247,0.45)">The Platform</div>
+  </div>
+
+  <div class="section-content">
+    <div class="section-rail">Introducing mySATHI</div>
+    <div class="section-num">02</div>
+    <div class="section-name">A computer-adaptive readiness layer, built around the <em>4Cs.</em></div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span style="color:#F2A99F">SATHI</span> × British Council Education India</div>
+    <div class="pgnum">06</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 08  WHAT IS MYSATHI                               -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">02 · The Platform</div>
+    <div class="meta">07 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">The platform in one slide</div>
+    <h1 class="action">mySATHI is the readiness diagnostic that sits <em>before</em> the exam, the training programme and the application.</h1>
+
+    <div class="cols-2" style="margin-top:32px;gap:72px">
+      <div class="col-card">
+        <span class="kicker">What it does</span>
+        <div class="divider-strong"></div>
+        <ul>
+          <li><b>4Cs assessment</b> — Critical Thinking, Creativity, Collaboration, Communication</li>
+          <li><b>Computer-adaptive</b> engine grounded in Item Response Theory (IRT)</li>
+          <li><b>Continuous tracking</b> — longitudinal student progression, not point-in-time scores</li>
+          <li><b>NEP 2020 aligned</b> — capability-based, not marks-centric</li>
+          <li><b>Proctored delivery</b> across a pan-India centre network</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <span class="kicker">What it produces</span>
+        <div class="divider-strong"></div>
+        <ul>
+          <li><b>Readiness Index</b> — a single, scaled, defensible number per student</li>
+          <li><b>4C sub-scores</b> with growth trajectories</li>
+          <li><b>Cohort dashboards</b> for partners — pass-rate predictors, gap maps, segment reports</li>
+          <li><b>Selection / shortlisting filters</b> for scholarship and mobility programmes</li>
+          <li><b>Diagnostic-to-intervention</b> linkages for training programmes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">07</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 09  THE 4Cs                                       -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">02 · The Platform</div>
+    <div class="meta">08 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">The construct</div>
+    <h1 class="action">The 4Cs are the capabilities UK universities and global employers actually <em>select on.</em></h1>
+    <p class="subtitle">Each is operationalised as a measurable, IRT-calibrated construct — not a self-report scale.</p>
+
+    <div class="cgrid" style="margin-top:24px">
+      <div class="cbox">
+        <div class="ctag">01</div>
+        <div class="ch">Critical Thinking</div>
+        <div class="csub">Reasoning under ambiguity, evaluating evidence, structured problem decomposition — relevant to case-based UK pedagogy and reasoning-heavy items in CFA / ACCA.</div>
+      </div>
+      <div class="cbox">
+        <div class="ctag">02</div>
+        <div class="ch">Creativity</div>
+        <div class="csub">Divergent generation, novel framing, applied originality — relevant to design / strategy programmes and to entrepreneurial readiness.</div>
+      </div>
+      <div class="cbox">
+        <div class="ctag">03</div>
+        <div class="ch">Collaboration</div>
+        <div class="csub">Working under joint ownership, conflict resolution, role flexibility — particularly relevant in the group-driven format of many UK Master's programmes.</div>
+      </div>
+      <div class="cbox">
+        <div class="ctag">04</div>
+        <div class="ch">Communication</div>
+        <div class="csub">Audience-aware written and verbal output, structured argumentation — designed to complement Cambridge English by adding a capability lens alongside proficiency.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">08</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 10  SECTION DIVIDER : ECOSYSTEM FIT               -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide section-divider">
+  <div class="s-header">
+    <div class="label" style="color:#F2A99F">Section three</div>
+    <div class="meta" style="color:rgba(250,249,247,0.45)">Ecosystem Fit</div>
+  </div>
+
+  <div class="section-content">
+    <div class="section-rail">Where We Plug In</div>
+    <div class="section-num">03</div>
+    <div class="section-name">Three integration points across the BC Education portfolio.</div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span style="color:#F2A99F">SATHI</span> × British Council Education India</div>
+    <div class="pgnum">09</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 11  ECOSYSTEM MAP                                 -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">03 · Ecosystem Fit</div>
+    <div class="meta">10 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">The integration map</div>
+    <h1 class="action">mySATHI sits one step <em>upstream</em> of every BC Education product — not parallel, not downstream.</h1>
+
+    <div class="flow" style="margin-top:32px">
+      <div class="step active">
+        <div class="step-num">— STAGE 00</div>
+        <div class="step-title">Student / candidate enters the funnel</div>
+        <div class="step-body">Tier 1, Tier 2, Tier 3 cities · school, university, working professionals</div>
+      </div>
+      <div class="step active">
+        <div class="step-num">— STAGE 01</div>
+        <div class="step-title">mySATHI readiness diagnostic</div>
+        <div class="step-body"><b>4Cs · computer-adaptive · proctored</b> · Readiness Index + sub-scores generated</div>
+      </div>
+      <div class="step">
+        <div class="step-num">— STAGE 02</div>
+        <div class="step-title">BC Education products</div>
+        <div class="step-body">Exams (CFA / ACCA / CamEng) · English &amp; professional skills training · Mobility &amp; scholarships</div>
+      </div>
+      <div class="step">
+        <div class="step-num">— STAGE 03</div>
+        <div class="step-title">Outcome &amp; longitudinal tracking</div>
+        <div class="step-body">Pass rates · placement · UK university progression · feedback loop into BC product design</div>
+      </div>
+    </div>
+
+    <div class="cols-3" style="margin-top:32px;gap:36px">
+      <div class="col-card">
+        <span class="pill dot">Use case A</span>
+        <div class="col-title">Pre-exam readiness screening — supporting first-attempt pass rates on UK exams</div>
+      </div>
+      <div class="col-card">
+        <span class="pill dot">Use case B</span>
+        <div class="col-title">Diagnostic-first English &amp; professional skills training delivery</div>
+      </div>
+      <div class="col-card">
+        <span class="pill dot">Use case C</span>
+        <div class="col-title">Capability signal for mobility, scholarships and university filtering</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">10</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 12  USE CASE A : PRE-EXAM READINESS               -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">03 · Ecosystem Fit · Use Case A</div>
+    <div class="meta">11 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Use case A — UK exam delivery</div>
+    <h1 class="action">A readiness screen that runs <em>before</em> CFA, ACCA, Cambridge English — to lift pass rates and protect exam-board reputation.</h1>
+
+    <div class="cols-2" style="margin-top:32px;gap:56px">
+      <div class="col-card">
+        <span class="kicker">How it could work</span>
+        <div class="divider-strong"></div>
+        <ol style="list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li class="body-md"><b style="color:var(--accent)">01.</b> &nbsp; Candidate registers for an upcoming exam window with BC.</li>
+          <li class="body-md"><b style="color:var(--accent)">02.</b> &nbsp; mySATHI screen offered alongside the registration flow — proctored, ~45 minutes.</li>
+          <li class="body-md"><b style="color:var(--accent)">03.</b> &nbsp; Readiness Index returned to BC and the candidate.</li>
+          <li class="body-md"><b style="color:var(--accent)">04.</b> &nbsp; Below-threshold candidates routed to BC's English / skills training — or to deferred exam slots.</li>
+          <li class="body-md"><b style="color:var(--accent)">05.</b> &nbsp; Above-threshold candidates progress with confidence.</li>
+        </ol>
+      </div>
+      <div class="col-card">
+        <span class="kicker">Why BC wins</span>
+        <div class="divider-strong"></div>
+        <ul>
+          <li><b>Stronger candidate funnel</b> — supports first-attempt pass rates and exam-board confidence in India</li>
+          <li><b>Potential value-add</b> — readiness screen could be offered alongside registration as an optional layer</li>
+          <li><b>Natural cross-sell into training</b> — diagnostic flags can route candidates into BC English / skills programmes</li>
+          <li><b>Joint data signal</b> — opportunity to build longitudinal exam-readiness benchmarks over time</li>
+          <li><b>Differentiated positioning</b> — among the early exam delivery partnerships to layer in capability-based readiness</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">11</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 13  USE CASE B : ENGLISH & PROF SKILLS TRAINING   -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">03 · Ecosystem Fit · Use Case B</div>
+    <div class="meta">12 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Use case B — English &amp; professional skills training</div>
+    <h1 class="action">Diagnostic-first delivery — so corporate and university clients buy <em>outcomes,</em> not seat-time.</h1>
+
+    <div class="cols-2" style="margin-top:28px;gap:48px">
+      <div class="col-card">
+        <span class="kicker">The shift</span>
+        <div class="divider-strong"></div>
+        <p class="body-md">Today, BC's training programmes typically run a common curriculum across mixed-ability cohorts, with outcomes reported at end-of-programme attainment level.</p>
+        <p class="body-md" style="margin-top:10px"><b>With mySATHI:</b> a cohort begins with a 4Cs diagnostic. Intake data could inform personalisation; the exit snapshot quantifies <b>capability uplift</b> — not just hours delivered.</p>
+      </div>
+      <div class="col-card">
+        <span class="kicker">What BC ships to the client</span>
+        <div class="divider-strong"></div>
+        <ul>
+          <li><b>Cohort intake report</b> — 4C distribution, gap map, recommended track allocation</li>
+          <li><b>Personalisation hooks</b> — which modules to emphasise per learner segment</li>
+          <li><b>Mid-programme checkpoint</b> — adaptive course-correct</li>
+          <li><b>Exit certification</b> — capability uplift, scaled and defensible</li>
+          <li><b>Year-on-year benchmarking</b> — for repeat clients, longitudinal value</li>
+        </ul>
+        <p class="body-sm" style="margin-top:12px">The same engine could support English-specific tracks (paired with Cambridge English) and broader professional skills programmes for corporates and universities.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">12</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 14  USE CASE C : MOBILITY & SCHOLARSHIPS          -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">03 · Ecosystem Fit · Use Case C</div>
+    <div class="meta">13 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Use case C — Mobility &amp; scholarships</div>
+    <h1 class="action">A capability signal for UK universities and scholarship programmes — <em>beyond marks, beyond IELTS.</em></h1>
+
+    <div class="cols-3" style="margin-top:32px;gap:36px">
+      <div class="col-card">
+        <span class="kicker">For UK universities</span>
+        <div class="divider-strong"></div>
+        <ul>
+          <li>Capability evidence to complement transcripts</li>
+          <li>Find high-potential Tier 2 / 3 candidates that grades alone hide</li>
+          <li>Better conversion at offer stage; better fit at programme stage</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <span class="kicker">For scholarships</span>
+        <div class="divider-strong"></div>
+        <ul>
+          <li>Defensible, IRT-scaled selection layer</li>
+          <li>Equity by design — capability is less correlated with school type than marks</li>
+          <li>Auditable, longitudinal data trail for sponsor reporting</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <span class="kicker">For BC mobility events</span>
+        <div class="divider-strong"></div>
+        <ul>
+          <li>Pre-event readiness profiling for attendees</li>
+          <li>Smarter matching of students to participating UK universities</li>
+          <li>Stronger outcome stories for participating UK partners</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">13</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 15  WHY MYSATHI                                   -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">03 · Ecosystem Fit</div>
+    <div class="meta">14 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Why mySATHI specifically</div>
+    <h1 class="action">Four structural strengths we'd bring into <em>any partnership</em> with BC Education.</h1>
+
+    <div class="cols-4" style="margin-top:28px">
+      <div class="col-card">
+        <div class="col-num">01</div>
+        <div class="col-title">Pan-India reach across Tier 1, 2 and 3</div>
+        <div class="col-rule"></div>
+        <div class="col-body">CL Educate's footprint reaches the cities BC's exam-board partners care most about — including the cohorts where pass-rate gaps are largest.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-num">02</div>
+        <div class="col-title">Nationwide proctored centres</div>
+        <div class="col-rule"></div>
+        <div class="col-body">A physical assessment infrastructure that already meets the integrity standards required for high-stakes exam delivery.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-num">03</div>
+        <div class="col-title">IRT-based adaptive engine</div>
+        <div class="col-rule"></div>
+        <div class="col-body">Computer-adaptive tests grounded in psychometric rigour — not a quiz layer. Defensible scaled scores that travel.</div>
+      </div>
+      <div class="col-card">
+        <div class="col-num">04</div>
+        <div class="col-title">Longitudinal student tracking</div>
+        <div class="col-rule"></div>
+        <div class="col-body">Repeat-encounter design — readiness is tracked across school, exam, training and university entry, building a unique data asset.</div>
+      </div>
+    </div>
+
+    <div class="stat-row" style="margin-top:36px;grid-template-columns:repeat(3,1fr)">
+      <div class="stat">
+        <div class="v">NEP<sup>2020</sup></div>
+        <div class="l">Aligned by design — capability-led, not marks-centric</div>
+      </div>
+      <div class="stat">
+        <div class="v">DEXIT</div>
+        <div class="l">Adjacent assessments capability already in production</div>
+      </div>
+      <div class="stat">
+        <div class="v">CL<sup>+</sup></div>
+        <div class="l">Backed by CL Educate's three-decade education footprint</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">14</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 16  SECTION DIVIDER : PILOT                       -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide section-divider">
+  <div class="s-header">
+    <div class="label" style="color:#F2A99F">Section four</div>
+    <div class="meta" style="color:rgba(250,249,247,0.45)">Path Forward</div>
+  </div>
+
+  <div class="section-content">
+    <div class="section-rail">A Possible Pilot</div>
+    <div class="section-num">04</div>
+    <div class="section-name">An indicative 3–6 month pilot scope, <em>open to shaping</em> with BC.</div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span style="color:#F2A99F">SATHI</span> × British Council Education India</div>
+    <div class="pgnum">15</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 17  PILOT PROPOSAL                                -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">04 · Path Forward</div>
+    <div class="meta">16 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Draft pilot scope — for discussion</div>
+    <h1 class="action">An <em>indicative</em> shape — narrow enough to be testable, flexible enough to evolve with BC's input.</h1>
+
+    <table class="matrix" style="margin-top:24px">
+      <thead>
+        <tr>
+          <th style="width:22%">Pilot dimension</th>
+          <th style="width:32%">Indicative scope</th>
+          <th style="width:23%">BC could lead</th>
+          <th style="width:23%">mySATHI could lead</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Duration</td>
+          <td>3–6 months end-to-end, with a mid-point review</td>
+          <td>Sponsor &amp; governance</td>
+          <td>Delivery &amp; analytics</td>
+        </tr>
+        <tr>
+          <td>Possible vertical 1<br/><span class="body-sm" style="color:var(--muted)">Exam stream</span></td>
+          <td>One UK exam stream — Cambridge English is one candidate; final choice to be agreed with BC</td>
+          <td>Candidate access · exam pipeline · branding</td>
+          <td>Diagnostic engine · centre delivery · readiness reports</td>
+        </tr>
+        <tr>
+          <td>Possible vertical 2<br/><span class="body-sm" style="color:var(--muted)">Mobility / scholarship</span></td>
+          <td>One scholarship programme, or a small set of UK partner universities — capability signal layer</td>
+          <td>University &amp; scholarship relationships · cohort access</td>
+          <td>4C scoring · cohort dashboards · selection support</td>
+        </tr>
+        <tr>
+          <td>Indicative metrics</td>
+          <td>Readiness-to-outcome correlation · candidate experience · partner feedback · selection-quality signal</td>
+          <td>Outcome verification · partner feedback</td>
+          <td>Measurement methodology · longitudinal data</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="deliverables" style="margin-top:18px">
+      <div class="deliverable priority">
+        <div class="dh">Cohort readiness reports</div>
+        <div class="dd">Per-vertical dashboards with 4C distributions and indicative readiness signals.</div>
+      </div>
+      <div class="deliverable">
+        <div class="dh">Student segmentation</div>
+        <div class="dd">Suggested routing logic — who is ready, who may need prep, possible UK pathway fit.</div>
+      </div>
+      <div class="deliverable">
+        <div class="dh">Outcome learnings</div>
+        <div class="dd">A jointly-reviewed learning summary at pilot close — useful input for BC's own work.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">16</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 18  NEXT STEPS                                    -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide">
+  <div class="s-header">
+    <div class="label">04 · Path Forward</div>
+    <div class="meta">17 / 17</div>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Suggested next steps</div>
+    <h1 class="action">Three light-touch steps to take this <em>forward together</em> — at a pace that works for BC.</h1>
+
+    <div class="iconlist" style="margin-top:32px">
+      <div class="item">
+        <div class="ico">01</div>
+        <div class="txt">
+          <div class="t">A short follow-up conversation</div>
+          <div class="d">A 30–45 minute discussion with the relevant British Council Education team members — to test ecosystem fit and surface questions on either side.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ico">02</div>
+        <div class="txt">
+          <div class="t">A joint shaping session on the draft pilot scope</div>
+          <div class="d">A working session to refine the pilot's shape — verticals, indicative metrics, governance — based on where BC sees the strongest fit.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ico">03</div>
+        <div class="txt">
+          <div class="t">A jointly drafted pilot scope document</div>
+          <div class="d">A short, mutually-agreed scope note we can use as a working document — flexible, non-binding, and a basis for BC's internal review.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">17</div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
+<!-- 19  CLOSING POSITIONING                           -->
+<!-- ──────────────────────────────────────────────── -->
+<section class="slide closing">
+  <div class="s-header">
+    <div class="label">Closing</div>
+    <div class="meta">Thank you</div>
+  </div>
+
+  <div class="center-col">
+    <div class="quote">
+      British Council enables <em>access</em><br/>to global opportunities.<br/>
+      <span style="display:block;height:14px"></span>
+      mySATHI ensures students are <em>ready</em><br/>to succeed in them.
+    </div>
+    <div class="quote-rule"></div>
+    <div class="signoff">Thank you · Open to taking this forward together</div>
+  </div>
+
+  <div class="s-footer">
+    <div class="brand">my<span>SATHI</span> × British Council Education India</div>
+    <div class="pgnum">18</div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

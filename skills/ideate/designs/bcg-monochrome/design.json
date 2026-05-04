@@ -1,0 +1,25 @@
+{
+  "name": "bcg-monochrome",
+  "tagline": "Almost-black on cream, single accent green, generous whitespace.",
+  "tokens": {
+    "ink": "#1A1A1A",
+    "ink_soft": "#2D2D2D",
+    "paper": "#F5F2EA",
+    "paper_2": "#EBE7DC",
+    "rule": "#D6D2C5",
+    "rule_strong": "#A8A39A",
+    "muted": "#5C5C5C",
+    "muted_2": "#8A8A8A",
+    "accent": "#0F6E3A",
+    "accent_deep": "#094B27",
+    "warm": "#9A8A6B"
+  },
+  "fonts": {
+    "display": "Manrope",
+    "body": "Manrope",
+    "google_url": "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap",
+    "headline_font": "Manrope",
+    "headline_weight": 700
+  },
+  "slide": { "width": 1280, "height": 720, "pad_x": 80, "pad_y": 60 }
+}

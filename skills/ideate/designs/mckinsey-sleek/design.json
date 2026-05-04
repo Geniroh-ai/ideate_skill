@@ -1,0 +1,25 @@
+{
+  "name": "mckinsey-sleek",
+  "tagline": "All-Inter, no italic serif. Same warm paper + navy + restrained red.",
+  "tokens": {
+    "ink": "#0E1B2C",
+    "ink_soft": "#1F2D3F",
+    "paper": "#FAF9F7",
+    "paper_2": "#F2EFE9",
+    "rule": "#E2DED5",
+    "rule_strong": "#C9C4B7",
+    "muted": "#6B7280",
+    "muted_2": "#9CA3AF",
+    "accent": "#C0392B",
+    "accent_deep": "#8E2A20",
+    "warm": "#C4915A"
+  },
+  "fonts": {
+    "display": "Inter",
+    "body": "Inter",
+    "google_url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap",
+    "headline_font": "Inter",
+    "headline_weight": 700
+  },
+  "slide": { "width": 1280, "height": 720, "pad_x": 72, "pad_y": 54 }
+}

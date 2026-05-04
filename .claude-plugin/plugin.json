@@ -1,0 +1,13 @@
+{
+  "name": "ideate",
+  "version": "1.0.0",
+  "description": "McKinsey-style pitch-deck wizard. Turns raw context into versioned markdown + HTML + PDF presentations through a guided conversational flow.",
+  "author": {
+    "name": "Sharan Subrahmanyam",
+    "email": "sharan@mysathi.org"
+  },
+  "homepage": "",
+  "repository": "",
+  "license": "MIT",
+  "keywords": ["presentation", "deck", "pitch", "slides", "mckinsey", "wizard"]
+}
