@@ -105,7 +105,7 @@ function parseSlide(block) {
     // List item: `- field: value` (starts new item)
     const itemStart = stripped.match(/^\s*-\s+([a-z_][a-z0-9_]*):\s*(.*)$/i);
     if (itemStart && inListKey) {
-      currentItem = { [itemStart[1]]: itemStart[2] };
+      currentItem = { [itemStart[1]]: itemStart[2].replace(/^"|"$/g, '') };
       slide[inListKey].push(currentItem);
       continue;
     }
@@ -113,7 +113,7 @@ function parseSlide(block) {
     // List item continuation: `  field: value`
     const cont = stripped.match(/^\s+([a-z_][a-z0-9_]*):\s*(.*)$/i);
     if (cont && currentItem) {
-      currentItem[cont[1]] = cont[2];
+      currentItem[cont[1]] = cont[2].replace(/^"|"$/g, '');
       continue;
     }
 
@@ -280,7 +280,7 @@ const layouts = {
         <table class="matrix">
           <thead><tr>${headers.map((h) => `<th>${esc(h.label || h)}</th>`).join('')}</tr></thead>
           <tbody>
-            ${rows.map((r) => `<tr>${(r.cells || []).map((c) => `<td>${richEsc(c)}</td>`).join('')}</tr>`).join('')}
+            ${rows.map((r) => `<tr>${(r.cells || r.bullets || []).map((c) => `<td>${richEsc(c)}</td>`).join('')}</tr>`).join('')}
           </tbody>
         </table>
       </div>
